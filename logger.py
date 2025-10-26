@@ -5,9 +5,10 @@ from datetime import datetime
 import traceback
 
 class LogHelper:
-    def __init__(self, log_dir):
+    def __init__(self, log_dir, logger_prefix=None):
         log_file = os.path.join(log_dir, "error.log")
-        self.logger = logging.getLogger(f"pydefi_{id(self)}")
+        prefix = logger_prefix if logger_prefix is not None else "pyFormDin_"
+        self.logger = logging.getLogger(f"{prefix}{id(self)}")
         self.logger.setLevel(logging.ERROR)
         if not self.logger.hasHandlers():
             handler = TimedRotatingFileHandler(log_file, when="midnight", backupCount=30, encoding="utf-8")
