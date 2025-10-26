@@ -1,8 +1,6 @@
 import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from datetime import datetime
-import traceback
 
 class LogPyFormDin:
     def __init__(self, log_dir, logger_prefix=None):
