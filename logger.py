@@ -15,21 +15,27 @@ class LogHelper:
         error_handler = TimedRotatingFileHandler(error_file, when="midnight", backupCount=30, encoding="utf-8")
         error_handler.setLevel(logging.ERROR)
         error_handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(message)s'))
-        self.logger.addHandler(error_handler)
+        self._add_unique_handler(self.logger, error_handler, error_file)
 
         # Handler para warnings
         warning_file = os.path.join(log_dir, "warning.log")
         warning_handler = TimedRotatingFileHandler(warning_file, when="midnight", backupCount=30, encoding="utf-8")
         warning_handler.setLevel(logging.WARNING)
         warning_handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(message)s'))
-        self.logger.addHandler(warning_handler)
+        self._add_unique_handler(self.logger, warning_handler, warning_file)
 
         # Handler para info/debug
         info_file = os.path.join(log_dir, "info.log")
         info_handler = TimedRotatingFileHandler(info_file, when="midnight", backupCount=30, encoding="utf-8")
         info_handler.setLevel(logging.INFO)
         info_handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(message)s'))
-        self.logger.addHandler(info_handler)
+        self._add_unique_handler(self.logger, info_handler, info_file)
+
+    def _add_unique_handler(self, logger, handler, log_file):
+        for h in logger.handlers:
+            if hasattr(h, 'baseFilename') and h.baseFilename == os.path.abspath(log_file):
+                return  # Já existe handler para este arquivo
+        logger.addHandler(handler)
 
     def log_info(self, msg):
         self.logger.info(msg)
