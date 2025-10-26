@@ -4,7 +4,7 @@ from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
 import traceback
 
-class LogHelper:
+class LogPyFormDin:
     def __init__(self, log_dir, logger_prefix=None):
         prefix = logger_prefix if logger_prefix is not None else "pyFormDin_"
         self.logger = logging.getLogger(f"{prefix}{id(self)}")
