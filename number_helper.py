@@ -1,9 +1,9 @@
 from babel.numbers import format_decimal
-from config import LOCALE_DEFAULT, NUMBER_DECIMALS_DEFAULT
 
 class NumberHelper():
-    def __init__(self):
-        pass
+    def __init__(self, locale_default=None, number_decimals_default=None):
+        self.locale_default = locale_default if locale_default is not None else "pt_BR"
+        self.number_decimals_default = number_decimals_default if number_decimals_default is not None else 2
 
     def format_number(self, value: float, casas: int = 2, locale: str = "pt_BR") -> str:
         """
@@ -17,11 +17,9 @@ class NumberHelper():
         formato = f"#,##0.{''.join(['0'] * casas)}" if casas > 0 else "#,##0"
         return format_decimal(value, format=formato, locale=locale)
     
-    def format_number_default(self, value: float, casas: int = NUMBER_DECIMALS_DEFAULT) -> str:
-        """
-        Formata um número para o padrão brasileiro (pt_BR).
-        """
-        return self.format_number(value, casas=casas, locale=LOCALE_DEFAULT)
+    def format_number_default(self, value: float, casas: int = None) -> str:
+        casas = casas if casas is not None else self.number_decimals_default
+        return self.format_number(value, casas=casas, locale=self.locale_default)
 
     def format_number_brazil(self, value: float, casas: int = 2) -> str:
         """
