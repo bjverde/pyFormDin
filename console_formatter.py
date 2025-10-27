@@ -8,6 +8,14 @@ from rich.text import Text
 class ConsoleFormatter:
     def __init__(self):
         self.console = Console()
+        self.orange_btc = "\033[38;2;255;165;0m"
+
+    def clear(self):
+        import os
+        if os.name == "nt":
+            os.system("cls")
+        else:
+            os.system("clear")
 
     def print_banner(self, versao, description, autor, link):
         content = Text()
@@ -26,15 +34,6 @@ class ConsoleFormatter:
         print()
 
     @staticmethod
-    def clear():
-        # Windows
-        if os.name == "nt":
-            os.system("cls")
-        # Linux / Mac
-        else:
-            os.system("clear")        
-
-    @staticmethod
     def print_error(msg):
         content = Text(f"❌ {msg}", style="bold red")
         panel = Panel(
@@ -45,4 +44,4 @@ class ConsoleFormatter:
         )
         console = Console()
         console.print(panel)
-        print()        
+        print()
