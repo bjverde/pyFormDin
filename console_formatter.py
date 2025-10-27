@@ -40,10 +40,10 @@ class ConsoleFormatter:
         console.print(Rule())  # Linha simples
         if isinstance(msg, (list, tuple)):
             for linha in msg:
-                content = Text(f"{icon} {linha}", style=styleText, justify="left")
+                content = Text(f"{icon}  {linha}", style=styleText, justify="left")
                 console.print(content)
         else:
-            content = Text(f"{icon} {msg}", style=styleText, justify="left")
+            content = Text(f"{icon}  {msg}", style=styleText, justify="left")
             console.print(content)
         print()
 
