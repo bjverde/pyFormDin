@@ -34,6 +34,10 @@ class ConsoleFormatter:
         self.console.print(panel)
         print()
 
+    def print_rule(self, msg=None, style=None, align=None, characters="-"):
+        rule = Rule(msg, style=style, align=align, characters=characters)
+        self.console.print(rule)
+
     def print_msg(self, msg, styleText, icon, showIcon=True):
         icon = icon if showIcon else ""
         console = Console()
