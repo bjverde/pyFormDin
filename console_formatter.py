@@ -34,15 +34,27 @@ class ConsoleFormatter:
         self.console.print(panel)
         print()
 
-    @staticmethod
-    def print_error(msg):
+    def print_msg(self, msg, styleText, icon, showIcon=True):
+        icon = icon if showIcon else ""
         console = Console()
         console.print(Rule())  # Linha simples
         if isinstance(msg, (list, tuple)):
             for linha in msg:
-                content = Text(f"❌ {linha}", style="bold red", justify="left")
+                content = Text(f"{icon} {linha}", style=styleText, justify="left")
                 console.print(content)
         else:
-            content = Text(f"❌ {msg}", style="bold red", justify="left")
+            content = Text(f"{icon} {msg}", style=styleText, justify="left")
             console.print(content)
         print()
+
+    def print_ok(self, msg, showIcon=True):
+        self.print_msg(msg, "bold green", "✅", showIcon)
+
+    def print_info(self, msg, showIcon=True):
+        self.print_msg(msg, "bold blue", "ℹ️", showIcon)
+
+    def print_warning(self, msg, showIcon=True):
+        self.print_msg(msg, "bold yellow", "⚠️", showIcon)
+
+    def print_error(self, msg, showIcon=True):
+        self.print_msg(msg, "bold red", "❌", showIcon)
