@@ -22,3 +22,16 @@ class ConsoleFormatter:
         )
         self.console.print(panel)
         print()
+
+    @staticmethod
+    def print_error(msg):
+        content = Text(f"❌ {msg}", style="bold red")
+        panel = Panel(
+            Align.center(content),
+            title="[bold red]Erro[/]",
+            border_style="red",
+            padding=(1, 2)
+        )
+        console = Console()
+        console.print(panel)
+        print()        
