@@ -1,3 +1,5 @@
+import os
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.align import Align
@@ -22,3 +24,25 @@ class ConsoleFormatter:
         )
         self.console.print(panel)
         print()
+
+    @staticmethod
+    def clear():
+        # Windows
+        if os.name == "nt":
+            os.system("cls")
+        # Linux / Mac
+        else:
+            os.system("clear")        
+
+    @staticmethod
+    def print_error(msg):
+        content = Text(f"❌ {msg}", style="bold red")
+        panel = Panel(
+            Align.center(content),
+            title="[bold red]Erro[/]",
+            border_style="red",
+            padding=(1, 2)
+        )
+        console = Console()
+        console.print(panel)
+        print()        
