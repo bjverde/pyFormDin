@@ -2,6 +2,7 @@ import os
 
 from rich.console import Console
 from rich.panel import Panel
+from rich.rule import Rule
 from rich.align import Align
 from rich.text import Text
 
@@ -35,13 +36,8 @@ class ConsoleFormatter:
 
     @staticmethod
     def print_error(msg):
-        content = Text(f"❌ {msg}", style="bold red")
-        panel = Panel(
-            Align.center(content),
-            title="[bold red]Erro[/]",
-            border_style="red",
-            padding=(1, 2)
-        )
+        content = Text(f"❌ {msg}", style="bold red", justify="left")
         console = Console()
-        console.print(panel)
+        console.print(Rule())  # Linha simples
+        console.print(content)
         print()
