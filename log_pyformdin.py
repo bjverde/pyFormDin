@@ -33,13 +33,21 @@ class LogPyFormDin:
         warning_handler.addFilter(LevelFilter(logging.WARNING))
         self._add_unique_handler(self.logger, warning_handler, warning_file)
 
-        # Handler para info/debug
+        # Handler para info
         info_file = os.path.join(log_dir, "info.log")
         info_handler = TimedRotatingFileHandler(info_file, when="midnight", backupCount=30, encoding="utf-8")
         info_handler.setLevel(logging.INFO)
         info_handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(message)s'))
         info_handler.addFilter(LevelFilter(logging.INFO))
         self._add_unique_handler(self.logger, info_handler, info_file)
+
+        # Handler para debug
+        debug_file = os.path.join(log_dir, "debug.log")
+        debug_handler = TimedRotatingFileHandler(debug_file, when="midnight", backupCount=30, encoding="utf-8")
+        debug_handler.setLevel(logging.DEBUG)
+        debug_handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(message)s'))
+        debug_handler.addFilter(LevelFilter(logging.DEBUG))
+        self._add_unique_handler(self.logger, debug_handler, debug_file)      
 
         self.console_formatter = ConsoleFormatter()
 
