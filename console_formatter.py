@@ -36,8 +36,13 @@ class ConsoleFormatter:
 
     @staticmethod
     def print_error(msg):
-        content = Text(f"❌ {msg}", style="bold red", justify="left")
         console = Console()
         console.print(Rule())  # Linha simples
-        console.print(content)
+        if isinstance(msg, (list, tuple)):
+            for linha in msg:
+                content = Text(f"❌ {linha}", style="bold red", justify="left")
+                console.print(content)
+        else:
+            content = Text(f"❌ {msg}", style="bold red", justify="left")
+            console.print(content)
         print()
