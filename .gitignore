@@ -1,0 +1,6 @@
+# ignora todas as pasta do pychace
+__pycache__/
+.env
+
+# ignora arquivo de cache de dependências
+.dependencies_verified
