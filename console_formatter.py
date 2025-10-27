@@ -1,12 +1,3 @@
-# pyDefi/utils/banner.py
-import sys
-import os
-
-# Adiciona o diretório pai ao sys.path para importar __about__
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from __about__ import __version__, __author__, __description__,__github__
-
 from rich.console import Console
 from rich.panel import Panel
 from rich.align import Align
