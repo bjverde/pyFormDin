@@ -2,6 +2,8 @@ import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
+from .console_formatter import ConsoleFormatter
+
 class LevelFilter(logging.Filter):
     def __init__(self, level):
         super().__init__()
@@ -39,6 +41,8 @@ class LogPyFormDin:
         info_handler.addFilter(LevelFilter(logging.INFO))
         self._add_unique_handler(self.logger, info_handler, info_file)
 
+        self.console_formatter = ConsoleFormatter()
+
     def _add_unique_handler(self, logger, handler, log_file):
         for h in logger.handlers:
             if hasattr(h, 'baseFilename') and h.baseFilename == os.path.abspath(log_file):
@@ -51,8 +55,10 @@ class LogPyFormDin:
     def log_warning(self, msg):
         self.logger.warning(msg)
 
-    def log_debug(self, msg):
+    def log_debug(self, msg, showTela=True):
         self.logger.debug(msg)
+        if showTela:
+            self.console_formatter.print_warning(msg)
 
     def log_exception(self, exc: Exception, context: str = ""):
         self.logger.error(f"{context}\n{exc}", exc_info=True)
